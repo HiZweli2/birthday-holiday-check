@@ -1,8 +1,8 @@
-Django Public Holiday Checker App
-Overview
+# Django Public Holiday Checker App
+## Overview
 This web application allows users to input a South African ID (SA ID) number and retrieve information about public holidays on their date of birth. The app decodes the SA ID, extracts details like date of birth, gender, and citizenship, and checks for matching holidays using an external API. The app also saves all records in a local database for future use and analysis.
 
-Running the App
+### Running the App
 The app can be run in two ways:
 
 1. Using Docker (Recommended)
@@ -10,17 +10,20 @@ This method saves time by avoiding the need to manually set up environment varia
 
 Steps:
 Clone the repository onto your local machine:
-
-bash
-Copy code
+```
 git clone <repository_url>
 cd <project_directory>
+```
 
 Build the Docker image:
+```
 sudo docker build -t django-app .
+```
 
 Run the Docker container:
+```
 sudo docker run -p 8000:8000 django-app
+```
 
 2. Running Locally
 For those who prefer running the app locally, you need to ensure Python 3 and pip are installed on your machine.
