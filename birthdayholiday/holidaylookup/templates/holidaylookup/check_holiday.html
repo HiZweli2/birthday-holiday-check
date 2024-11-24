@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday|Holiday|Check</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Check Public holidays on your date of birth</h1>
+        <p class="text-center">Enter your South African ID number to see if there are any public holidays on your date of birth</p>
+        <form  method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{form.as_p}}
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger mt-3">
+               <ul>
+                    { % for error in form.non_field_errors %}
+                        <li>{{error}}</li>
+                    { % endfor % }
+               </ul>
+            </div>
+        {% endif %}
+
+        {% if details %}
+        <div class="mt-4">
+            <h4 class="text-success">SA ID Details</h4>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>ID Number:</strong> {{ details.id_number }}</li>
+                <li class="list-group-item"><strong>Date of Birth:</strong> {{ details.date_of_birth }}</li>
+                <li class="list-group-item"><strong>Gender:</strong> {{ details.gender }}</li>
+                <li class="list-group-item"><strong>Citizenship:</strong> {{ details.citizenship }}</li>
+                <li class="list-group-item"><strong>Search Count:</strong> {{ details.search_count }}</li>
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if holidays %}
+        <div class="mt-4">
+            <h4 class="text-primary">Public Holidays on Your Date of Birth</h4>
+            <ul class="list-group">
+                {% for holiday in holidays %}
+                    <li class="list-group-item">
+                        <strong>{{ holiday.name }}</strong> ({{ holiday.date }})
+                        <p class="text-muted">{{ holiday.description }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
